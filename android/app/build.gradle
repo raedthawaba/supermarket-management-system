@@ -1,0 +1,45 @@
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+}
+
+def flutterRoot = System.getenv("FLUTTER_ROOT") ?: System.getenv("CODEMAGIC_FLUTTER_ROOT") ?: "/Users/builder/flutter"
+
+android {
+    namespace "com.example.supermarket_system_codemagic"
+    compileSdkVersion 34
+    ndkVersion "25.1.8937393"
+
+    defaultConfig {
+        applicationId "com.example.supermarket_system_codemagic"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+}

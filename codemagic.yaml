@@ -1,0 +1,67 @@
+# Codemagic YAML - Supermarket System
+workflows:
+  android-debug:
+    name: Android Debug Build
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    
+    environment:
+      vars:
+        PACKAGE_NAME: "com.example.supermarket_system_codemagic"
+      flutter: stable
+      java: 17
+    
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT
+        - $HOME/.pub-cache
+        - .dart_tool
+    
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+          flutter pub upgrade
+      
+      - name: Build APK (Debug)
+        script: |
+          flutter build apk --debug --verbose
+      
+      - name: Upload APK to Codemagic Artifacts
+        script: |
+          cp build/app/outputs/flutter-apk/app-debug.apk $CM_ARTIFACT_LINKS
+        artifacts:
+          - build/app/outputs/flutter-apk/app-debug.apq
+          
+  android-release:
+    name: Android Release Build
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    
+    environment:
+      vars:
+        PACKAGE_NAME: "com.example.supermarket_system_codemagic"
+        # Add your signing credentials here
+        # FCI_KEYSTORE_PATH: $CM_BUILD_DIR/keystore.keystore
+        # FCI_KEYSTORE_PASSWORD: $FCI_KEYSTORE_PASSWORD
+        # FCI_KEY_PASSWORD: $FCI_KEY_PASSWORD
+        # FCI_KEY_ALIAS: $FCI_KEY_ALIAS
+      flutter: stable
+      java: 17
+    
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+          flutter pub upgrade
+      
+      - name: Build APK (Release)
+        script: |
+          # flutter build apk --release --verbose --split-per-abi
+          flutter build apk --release --verbose
+      
+      - name: Upload APK to Codemagic Artifacts
+        script: |
+          cp build/app/outputs/flutter-apk/app-release.apk $CM_ARTIFACT_LINKS
+        artifacts:
+          - build/app/outputs/flutter-apk/app-release.apq
