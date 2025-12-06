@@ -1,0 +1,102 @@
+name: supermarket_system_complete
+description: Complete Supermarket Management System - Flutter App with Firebase, POS, Reports & Analytics
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Firebase - Latest Versions (December 2025)
+  firebase_core: ^3.8.0
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.0
+  firebase_storage: ^13.0.2
+  firebase_messaging: ^15.1.3
+  
+  # State Management - Latest Versions
+  riverpod: ^2.5.1
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  
+  # UI & Material Design - Latest
+  material_design_icons_flutter: ^7.0.7296
+  cupertino_icons: ^1.0.8
+  intl: ^0.19.0
+  
+  # Barcode Scanner - Latest
+  barcode_scan2: ^5.0.3
+  
+  # Printing & Export - Latest
+  pdf: ^3.10.7
+  printing: ^5.12.0
+  csv: ^6.0.0
+  open_file: ^3.3.2
+  excel: ^2.1.3
+  
+  # Local Storage - Latest
+  shared_preferences: ^2.3.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+  # HTTP & API - Latest
+  http: ^1.2.2
+  dio: ^5.7.0
+  
+  # Icons - Latest
+  font_awesome_flutter: ^10.7.0
+  iconly: ^1.0.0
+  
+  # Forms & Validation - Latest
+  flutter_form_builder: ^9.2.1
+  form_builder_validators: ^11.0.0
+  
+  # Charts & Analytics - Latest
+  fl_chart: ^0.69.0
+  
+  # Image Handling - Latest
+  cached_network_image: ^3.4.1
+  image_picker: ^1.1.2
+  image: ^4.2.0
+  
+  # Notifications - Latest
+  flutter_local_notifications: ^18.0.1
+  
+  # Device Info & Permissions - Latest
+  device_info_plus: ^10.1.0
+  package_info_plus: ^8.0.0
+  permission_handler: ^11.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.4.3
+  hive_generator: ^2.0.1
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/logos/
+    - assets/illustrations/
+    - assets/fonts/
+    
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700

@@ -1,0 +1,102 @@
+# Codemagic YAML - Supermarket System Complete
+workflows:
+  android-debug:
+    name: Android Debug Build
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    
+    environment:
+      vars:
+        PACKAGE_NAME: "com.example.supermarket_system_complete"
+        # FCI_KEYSTORE_PASSWORD: $FCI_KEYSTORE_PASSWORD
+      flutter: stable
+      java: 17
+    
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT
+        - $HOME/.pub-cache
+        - .dart_tool
+        - $HOME/.gradle/caches
+    
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+          flutter pub upgrade
+      
+      - name: Generate code (if needed)
+        script: |
+          flutter packages pub run build_runner build --delete-conflicting-outputs || true
+      
+      - name: Build APK (Debug)
+        script: |
+          flutter build apk --debug --verbose --split-per-abi
+      
+      - name: Upload APK to Codemagic Artifacts
+        script: |
+          mkdir -p build-output
+          cp build/app/outputs/flutter-apk/app-debug.apk build-output/
+          cp build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk build-output/ 2>/dev/null || true
+          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk build-output/ 2>/dev/null || true
+          cp build/app/outputs/flutter-apk/app-x86_64-release.apk build-output/ 2>/dev/null || true
+          
+      - name: Create build info
+        script: |
+          echo "Build completed on $(date)" > build-output/build-info.txt
+          echo "Flutter version: $(flutter --version)" >> build-output/build-info.txt
+          echo "Commit: $CM_COMMIT_SHA" >> build-output/build-info.txt
+          
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
+      - build-output/*.apk
+      - build-output/*.txt
+          
+  android-release:
+    name: Android Release Build
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    
+    environment:
+      vars:
+        PACKAGE_NAME: "com.example.supermarket_system_complete"
+        # Signing credentials (add these in Codemagic variables)
+        # FCI_KEYSTORE_PATH: $CM_BUILD_DIR/keystore.keystore
+        # FCI_KEYSTORE_PASSWORD: $FCI_KEYSTORE_PASSWORD
+        # FCI_KEY_PASSWORD: $FCI_KEY_PASSWORD
+        # FCI_KEY_ALIAS: $FCI_KEY_ALIAS
+      flutter: stable
+      java: 17
+    
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT
+        - $HOME/.pub-cache
+        - .dart_tool
+        - $HOME/.gradle/caches
+    
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+          flutter pub upgrade
+      
+      - name: Generate code (if needed)
+        script: |
+          flutter packages pub run build_runner build --delete-conflicting-outputs || true
+      
+      - name: Build APK (Release)
+        script: |
+          # flutter build apk --release --verbose --split-per-abi
+          flutter build apk --release --verbose
+      
+      - name: Upload APK to Codemagic Artifacts
+        script: |
+          mkdir -p build-output
+          cp build/app/outputs/flutter-apk/app-release.apk build-output/
+          echo "Release build completed on $(date)" > build-output/release-info.txt
+          
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build-output/*.apk
+      - build-output/*.txt
