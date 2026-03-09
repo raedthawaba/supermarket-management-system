@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  backend:
+    build: ./marketplace_backend
+    container_name: marketplace_backend
+    ports:
+      - "8000:8000"
+
+  admin:
+    build: ./admin_dashboard
+    container_name: marketplace_admin
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
