@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Edit, Trash2, Eye, Category } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye } from 'lucide-react';
 
 export default function CategoriesManagement() {
   const storeCategories = [
