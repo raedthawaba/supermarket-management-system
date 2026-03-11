@@ -23,7 +23,7 @@ const menuItems = [
   { id: 'stores', label: 'المتاجر', icon: Store },
   { id: 'drivers', label: 'المندوبين', icon: Truck },
   { id: 'orders', label: 'الطلبات', icon: ShoppingCart },
-  { id: 'categories', label: 'التصنيفات', icon: Category },
+  { id: 'categories', label: 'التصنيفات', icon: BarChart3 },
   { id: 'reports', label: 'التقارير', icon: BarChart3 },
   { id: 'settings', label: 'الإعدادات', icon: Settings },
 ];
