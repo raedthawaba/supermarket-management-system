@@ -5,7 +5,6 @@ import {
   Store,
   Truck,
   ShoppingCart,
-  Category,
   BarChart3,
   Settings,
   X
