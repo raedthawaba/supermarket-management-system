@@ -80,11 +80,11 @@ export default function Sidebar({ currentPage, setCurrentPage, isOpen, setIsOpen
                   w-full flex items-center gap-3 px-4 py-3 rounded-lg text-right transition-colors
                   ${isActive
                     ? 'bg-primary text-white'
-                    : 'text-gray-600 hover:bg-gray-50 `}
-              >
-'
+                    : 'text-gray-600 hover:bg-gray-50'
                   }
-                               <Icon className="w-5 h-5" />
+                `}
+              >
+                <Icon className="w-5 h-5" />
                 <span className="font-medium">{item.label}</span>
               </button>
             );
